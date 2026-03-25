@@ -57,13 +57,30 @@ For each:
 
 #### 3. Critical Change Detection
 
-Run this logic whenever you evaluate data (on‑demand or during heartbeat checks).  
+Run this logic whenever you evaluate data (on‑demand or when triggered by a cron schedule).  
 Thresholds are **defined in `CONFIG.md`** – read that file at startup or before each check.
 
-When you detect a critical change, **send a proactive Telegram message** to the user. Use the heartbeat mechanism to check periodically (e.g., every morning, or every few hours). The message should mirror the style of your query answers: business insight + data.
+When you detect a critical change, **send a proactive Telegram message** to the user. The message should mirror the style of your query answers: business insight + data.
 
 Example:  
 *"⚠️ Критическое изменение: допродажи снизились на 27% относительно среднего за последние 5 дней. Сегодня всего 12 500 ₽, а средний показатель за 5 дней — 17 200 ₽."*
+
+#### 4. Scheduled Checks (Cron)
+
+The environment will invoke you at times defined in `CRON.md`. When triggered for a critical‑change check, perform the following:
+
+- Read the latest day's data from the Google Sheet.
+- Compare against the thresholds in `CONFIG.md` (revenue drop, conversion threshold, upsell drop, plan deviation).
+- If any threshold is breached, send a Telegram notification as described above.
+- If everything is normal, do nothing (or log a quiet success if you prefer).
+
+The schedule is defined in `CRON.md`; you do not need to manage the timing yourself – just follow the trigger.
+
+## Scheduled Tasks (Cron)
+
+For tasks that need to run at specific times, use `CRON.md`. This file defines your scheduled checks (like critical change detection) and their timing. Follow the instructions there – you can read it at startup and schedule yourself.
+
+The assistant itself does not run cron; the environment (OpenClaw) will invoke you at those times. When you are invoked with a context that matches a scheduled task (e.g., "critical_check"), execute the logic described in `CRON.md`.
 
 ### Configuration
 
