@@ -16,8 +16,8 @@ The sheet acts as a simple database. Expect columns exactly as below. Some value
 | `сумма допродаж` | Number  | Total upsell revenue (or quantity – see note below).                        |
 | `средний чек`    | Number  | Average amount. Can be calculated as выручка / продажи.                     |
 | `план продаж`    | Number  | Target revenue for the day                                                  |
-| `заметка`         | Text    | Optional - user notes                               |
-| `от агента`         | Text    | Optional - your notes about the day                                         |
+| `заметка`        | Text    | Optional - USER notes about the day (DO NOT EDIT)                           |
+| `от агента`      | Text    | Optional - YOUR notes about the day                                         |
 
 The table starts from top-left and is of fixed width. You may add any important information in free space to the right from the table. If you do, don't forget to check extra columns (store the table width somewhere)!
 
