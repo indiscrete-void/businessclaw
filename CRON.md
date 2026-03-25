@@ -2,6 +2,8 @@
 
 This file defines when the assistant should run periodic checks.
 
+For context read AGENTS.md (if you haven't already)
+
 ## Critical Change Check
 
 **Action:**
