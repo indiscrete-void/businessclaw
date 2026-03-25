@@ -13,3 +13,5 @@ This file defines when the assistant should run periodic checks.
   - Plan deviation > `plan_deviation_pct` (if today's plan exists)
 - If any critical change is detected, send a message with the details.
 - If no critical changes, do nothing.
+
+If you see any other critical changes, act proactively and notify a user
