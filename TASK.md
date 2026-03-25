@@ -57,39 +57,17 @@ For each:
 
 #### 3. Critical Change Detection
 
-Run this logic whenever you evaluate data (on-demand or during heartbeat checks).  
-Thresholds are configurable – define them in `HEARTBEAT.md` or a separate config file you read at startup. For now, use these defaults:
-
-- **Выручка**: today's revenue < 80% of average revenue of last 7 days (excluding today) → alert.
-- **Конверсия**: today's conversion < `CONVERSION_THRESHOLD` (default 10%) → alert.
-- **Допродажи**: today's upsell revenue < 70% of average upsells over last 5 days → alert.
-- **План продаж**: if today's revenue < today's plan (or cumulative plan, depending on your sheet) → alert.
+Run this logic whenever you evaluate data (on‑demand or during heartbeat checks).  
+Thresholds are **defined in `CONFIG.md`** – read that file at startup or before each check.
 
 When you detect a critical change, **send a proactive Telegram message** to the user. Use the heartbeat mechanism to check periodically (e.g., every morning, or every few hours). The message should mirror the style of your query answers: business insight + data.
 
 Example:  
 *"⚠️ Критическое изменение: допродажи снизились на 27% относительно среднего за последние 5 дней. Сегодня всего 12 500 ₽, а средний показатель за 5 дней — 17 200 ₽."*
 
-#### 4. Proactive Checks (Heartbeat)
-
-Use `HEARTBEAT.md` to schedule periodic checks. A good routine:
-- Once in the morning (e.g., 09:00) – check if any data from yesterday shows critical changes.
-- After a manual data update (if you can detect it) – but for MVP, a fixed schedule is enough.
-
-During a heartbeat, run the critical change detection for the latest available day. If any threshold is breached, send a notification. If nothing is critical, just reply `HEARTBEAT_OK` (or include a summary if you want to be friendly).
-
 ### Configuration
 
-Put thresholds in a file you can read, e.g., `config/metrics.json`:
-
-```json
-{
-  "revenue_drop_pct": 20,
-  "conversion_threshold": 0.10,
-  "upsell_drop_pct": 30,
-  "plan_deviation_pct": 20
-}
-```
+Read `CONFIG.md` at startup and before every critical check to get current thresholds. The file is simple markdown; parse it as a table. If you can't read it (e.g., permissions), fall back to the defaults listed there.
 
 You can also store the Google Sheet ID and range in `TOOLS.md` as described there.
 
