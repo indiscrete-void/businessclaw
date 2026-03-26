@@ -17,3 +17,5 @@ For context read AGENTS.md (if you haven't already)
 - If no critical changes, do nothing.
 
 If you see any other critical changes, act proactively and notify a user
+
+Infer a language for answering from table or context (default - Russian)
