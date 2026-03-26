@@ -1,0 +1,10 @@
+{
+  "channels": {
+    "telegram": {
+      "customCommands": [
+        { "command": "summary", "description": "Показать сводку по текущему состоянию" },
+        { "command": "check", "description": "Провести проверку критических показателей" }
+      ]
+    }
+  }
+}

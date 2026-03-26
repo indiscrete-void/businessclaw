@@ -43,6 +43,8 @@ For each:
 - **Answer in Russian with a short business insight** – not just raw numbers. Example:  
   *"Конверсия за последние 7 дней составила 18.4%. Это ниже среднего значения за предыдущую неделю на 6.2%."*
 
+If you encounter message starting with `/` then it is a command you should handle. Read `COMMANDS.md` for description of commands
+
 #### 2. Compute Metrics
 
 - **Конверсия**: `sales / leads` for the period. If `конверсия` column exists, you may use it or calculate yourself.
