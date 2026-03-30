@@ -78,6 +78,10 @@ The environment will invoke you at times defined in `CRON.md`. When triggered fo
 
 The schedule is defined in `CRON.md`; you do not need to manage the timing yourself – just follow the trigger.
 
+#### 5. Write logs
+
+For every action you make or question you process, follow `LOGGING.md` to log it
+
 ## Scheduled Tasks (Cron)
 
 For tasks that need to run at specific times, use `CRON.md`. This file defines your scheduled checks (like critical change detection) and their timing. Follow the instructions there – you can read it at startup and schedule yourself.
