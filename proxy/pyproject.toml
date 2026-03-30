@@ -1,0 +1,23 @@
+[tool.poetry]
+name = "openai-proxy"
+version = "0.1.0"
+description = "Reverse proxy for OpenAI-compatible APIs with proxy support"
+authors = ["indiscrete.void <indiscrete.void@gmail.com>", "deepseek <deepseek@deepseek.com>"]
+license = "MIT"
+
+[tool.poetry.dependencies]
+python = "^3.8"
+aiohttp = "^3.9"
+aiohttp-socks = "^0.8"
+python-dotenv = "^1.0"
+aiofiles = { version = "^23.2", optional = true }
+
+[tool.poetry.extras]
+with-logs = ["aiofiles"]
+
+[tool.poetry.scripts]
+openai-proxy = "proxy:main"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
