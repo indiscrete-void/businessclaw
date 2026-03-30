@@ -48,5 +48,14 @@ TODO
 
 ## Ограничения 
 
-Требует мощную, мыслящую модель. Протестированон на облачном deepseek-reasoner и Nemotron 3 Super   
+Требует мощную, мыслящую модель.  
+Протестированная совместимость:  
+- deepseek-reasoner ✅  
+- Nemotron 3 Super ✅
+- qwen2.5:7b-instruct-q4_K_M ❌
+- nemotron-3-nano:4b ❌
+- granite4:3b ❌
+- cogito:8b ❌
+- deepseek-r1:8b ❌ (полностью не работает, тк openclaw не умеет вызывать с ним инструменты)
+
 Используется встроенный в openclaw телеграм бот
