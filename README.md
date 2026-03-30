@@ -50,8 +50,8 @@ TODO
 
 Требует мощную, мыслящую модель.  
 Протестированная совместимость:  
-- deepseek-reasoner ✅  
-- Nemotron 3 Super ✅
+- облачный deepseek-reasoner ✅  
+- облачный Nemotron 3 Super ✅
 - qwen2.5:7b-instruct-q4_K_M ❌
 - nemotron-3-nano:4b ❌
 - granite4:3b ❌
