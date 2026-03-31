@@ -28,12 +28,80 @@
 
 
 ## Установка
+### 1. Подготовка
+```sh
+git clone https://github.com/indiscrete-void/businessclaw.git
+cp .env.example .env
+```
 
-TODO
+### 2. OpenClaw
+#### Опционально: 2.1. A. Локальнаяя установка
+Для обычной установки следуйте [инструкции](https://docs.openclaw.ai/install)    
+Так же нужно выполнить установку gog:
+```sh
+brew install gogcli
+# или
+# git clone https://github.com/steipete/gogcli.git
+# cd gogcli
+# make
+# cp ./bin/gog /usr/local/bin/gog
+``` 
+
+#### Опционально: 2.1. B. Docker
+Если желаете использовать докер, [вот инструкция](https://docs.openclaw.ai/install/docker)  
+После чего нужно скопировать в директорию проекта openclaw файлы `Dockerfile.local` и `docker-compose.override.yml`, они содержат патчи которые позволяют корректно работать с `brew` и `npm`  
+`gog` установится автоматически
+
+#### Опционально: 2.2. Настройка OpenClaw
+Проведите стандартную процедуру настройки: Подключите нужную модель, если установка была в docker, укажите как пакетный менеджер `npm`, сделайте любые другие настройки под себя  
+
+#### Установка навыка для google таблиц
+Выполните
+```
+clawhub install steipete/gog
+```
+
+### Опционально: 3. Настройка прокси
+Если желаете использовать прокси для запросов, нужно перейти в директорию `proxy`, заполнить .env в ней и выполнить:
+```
+poetry run python main.py
+```
+
+Запишите прокси в глобальный .env (например `OPENAI_PROXY=http://docker.host.internal:12434`)
+
+### 4. Подключение таблицы
+Узнайте ID таблицы в Google Sheets и запишите в .env  
+Для этого можно перейти в браузере на таблицу и достать ID из отмеченной стрелками части в ссылке:  
+`https://docs.google.com/spreadsheets/d/-->1f1AHqUptcMfQ7v6p1wViuefDcTgkLP9IB-M5GgWdESc<--/edit?gid=0#gid=0`
+
+Далее нужно авторизоваться в Google API и подключить аккаунт [как описано](https://github.com/steipete/gogcli/tree/main?tab=readme-ov-file#quick-start)   
+Для полноты привожу выдержку шагов в консольной оболочке:
+```sh
+gog auth credentials ~/Downloads/client_secret_....json
+
+# Step 1: print auth URL (open it locally in a browser)
+gog auth add you@gmail.com --services sheets --remote --step 1
+
+# Step 2: paste the full redirect URL from your browser address bar
+gog auth add you@gmail.com --services sheets --remote --step 2 --auth-url 'http://127.0.0.1:<port>/oauth2/callback?code=...&state=...'
+```
+
+Последняя команда спросит пароль для зашированного файла с данными авторизации, запишите его в .env. Так же в .env нужно записать email который использовался  
+
+### 5. Настройка порогов
+В файле AGENTS.md найдите секцию CONFIG и измените в ней параметры
+
+### 6. Синхронизацияя настроек
+Укажите в .env рабочую директорию OpenClaw (обычно это ~/.openclaw)  
+ВАЖНО: Следующий шаг *заменяет* файлы в workspace и *модифицирует* конфиг openclaw.json, а так же вставляет наш .env  
+Выполните скрипт `sync.sh` (требует python и bash)
+
+### Опционально: 7. Критические проверки
+Для проведения запланированных проверок критических показателей, создайте cron-задачу в интерфейсе OpenClaw, указав нужный период выполения, и заполните описание короткой инструкцией `/check`
 
 ## Логирование
 
-ИИ агент записывает свои действия в память как указано в LOGGING.md. Можно попросить его рассказать о них    
+ИИ агент записывает свои действия в память как указано в секции LOGGING. Можно попросить его рассказать о них    
 Так же предоставляется прокси для моделей (совместимых с API OpenAI) которое позволяет записывать каждый запрос и ответ на уровне HTTP
 
 ## Бот
