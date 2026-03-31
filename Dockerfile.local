@@ -1,0 +1,29 @@
+FROM openclaw:local
+
+USER root
+
+RUN apt-get update && \
+    DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+      build-essential procps curl file git python3 ca-certificates && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/* /var/cache/apt/archives/*
+
+RUN mkdir -p /home/linuxbrew && \
+    chown -R node:node /home/linuxbrew
+
+RUN mkdir -p /usr/local/lib/node_modules /usr/local/bin && \
+    chown -R node:node /usr/local/lib/node_modules /usr/local/bin
+
+USER node
+RUN NONINTERACTIVE=1 /bin/bash -c \
+      "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+RUN if [ ! -e /home/linuxbrew/.linuxbrew/Library ]; then ln -s /home/linuxbrew/.linuxbrew/Homebrew/Library /home/linuxbrew/.linuxbrew/Library; fi
+
+USER root
+ENV HOMEBREW_PREFIX=/home/linuxbrew/.linuxbrew
+ENV HOMEBREW_CELLAR=/home/linuxbrew/.linuxbrew/Cellar
+ENV HOMEBREW_REPOSITORY=/home/linuxbrew/.linuxbrew/Homebrew
+ENV PATH="/home/linuxbrew/.linuxbrew/bin:/home/linuxbrew/.linuxbrew/sbin:${PATH}"
+
+USER node
+RUN brew install gogcli

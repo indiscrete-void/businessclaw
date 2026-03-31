@@ -1,0 +1,12 @@
+services:
+  openclaw-gateway:
+    image: openclaw:local-brew
+    environment:
+      HOMEBREW_PREFIX: /home/linuxbrew/.linuxbrew
+      HOMEBREW_BREW_FILE: /home/linuxbrew/.linuxbrew/bin/brew
+
+  openclaw-cli:
+    image: openclaw:local-brew
+    environment:
+      HOMEBREW_PREFIX: /home/linuxbrew/.linuxbrew
+      HOMEBREW_BREW_FILE: /home/linuxbrew/.linuxbrew/bin/brew
