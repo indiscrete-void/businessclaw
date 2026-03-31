@@ -33,6 +33,7 @@ function merge-config {
 
 install-to-workspace AGENTS.md
 install-to-workspace TOOLS.md
+install-to-workspace CONFIG.md
 merge-config openclaw.commands.json
 if [ -n $OPENAI_PROXY ]; then
   merge-config openclaw.providers.json
