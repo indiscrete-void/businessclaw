@@ -7,7 +7,7 @@
 # DATABASE
 
 Данные хранятся в Google Sheets.  
-ID таблицы задаётся переменной окружения `GOG_TABLE`.  
+ID таблицы - `$GOG_TABLE`.  
 Доступ через навык `gog`:  
 - `gog sheets get $GOG_TABLE A1:Z100` — получить диапазон.  
 - `gog sheets update $GOG_TABLE C10 42` — записать значение.  
