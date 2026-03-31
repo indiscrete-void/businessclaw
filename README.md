@@ -63,7 +63,7 @@ clawhub install steipete/gog
 poetry run python main.py
 ```
 
-Запишите прокси в .env (например `http://docker.host.internal:12434`)
+Запишите прокси в глобальный .env (например `OPENAI_PROXY=http://docker.host.internal:12434`)
 
 ### 4. Подключение таблицы
 Узнайте ID таблицы в Google Sheets и запишите в .env  
