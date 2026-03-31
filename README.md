@@ -28,8 +28,72 @@
 
 
 ## Установка
+### 1. Подготовка
+```sh
+git clone https://github.com/indiscrete-void/businessclaw.git
+cp .env.example .env
+```
 
-TODO
+### Опционально: 2. Установка OpenClaw
+#### 2.1. A. Локальнаяя установка
+Для обычной установки следуйте [инструкции](https://docs.openclaw.ai/install)    
+Так же нужно выполнить установка gog и навыка для него:
+```sh
+brew install gogcli
+# или
+# git clone https://github.com/steipete/gogcli.git
+# cd gogcli
+# make
+# cp ./bin/gog /usr/local/bin/gog
+
+clawhub install steipete/gog
+``` 
+
+#### 2.1. B. Docker
+Если желаете использовать докер, [вот инструкция](https://docs.openclaw.ai/install/docker)  
+После чего нужно скопировать в директорию проекта openclaw файлы `Dockerfile.local` и `docker-compose.override.yml`, они содержат патчи которые позволяют корректно работать с brew и npm  
+Всё для работы `gog` установится автоматически
+
+#### 2.2. Настройка OpenClaw
+Проведие стандартную процедуру настройки: Подключите нужную модель, если установка была в docker, укажите как пакетный менеджер npm, сделайте любые другие настройки под себя  
+
+### Опционально: 3. Настройка прокси
+Если желаете использовать прокси для запросов, нужно перейти в директорию `proxy` и выполнить:
+```
+poetry run python main.py
+```
+
+Запишите прокси в .env
+
+### 4. Подключение таблицы
+Узнайте ID таблицы в Google Sheets и запишите в .env  
+Для этого можно перейти в браузере на таблицу и достать ID из отмеченной стрелками части в ссылке:  
+`https://docs.google.com/spreadsheets/d/-->1f1AHqUptcMfQ7v6p1wViuefDcTgkLP9IB-M5GgWdESc<--/edit?gid=0#gid=0`
+
+Далее нужно авторизоваться в Google API и подключить аккаунт [как описано](https://github.com/steipete/gogcli/tree/main?tab=readme-ov-file#quick-start)   
+Для полноты привожу выдержку шагов в консольной оболочке:
+```sh
+gog auth credentials ~/Downloads/client_secret_....json
+
+# Step 1: print auth URL (open it locally in a browser)
+gog auth add you@gmail.com --services sheets --remote --step 1
+
+# Step 2: paste the full redirect URL from your browser address bar
+gog auth add you@gmail.com --services sheets --remote --step 2 --auth-url 'http://127.0.0.1:<port>/oauth2/callback?code=...&state=...'
+```
+
+И укажите пароль от зашифрованного файла авторизации а так же активный email в .env  
+
+### 5. Настройка порогов
+В файле AGENTS.md найдите секцию CONFIG и измените в ней параметры
+
+### 6. Установка инструкций для агента
+Укажите по примеру в .env директорию openclaw (по стандарту это ~/.openclaw)  
+ВАЖНО: Следующией шаг *заменяет* файлы в workspace и *модифицирует* конфиг openclaw.json   
+После того как весь .env заполнен и пороги настроены, выполните скрипт `sync.sh` (требует python и bash)
+
+### Опционально: 7. Критические проверки
+Для проведения запланированных проверок критических показателей, создайте cron-задачу в интерфейсе OpenClaw, указав нужный период выполения, и заполните описание короткой инструкцией `/check`
 
 ## Логирование
 
