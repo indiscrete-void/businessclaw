@@ -82,7 +82,7 @@ gog auth add you@gmail.com --services sheets --remote --step 1
 gog auth add you@gmail.com --services sheets --remote --step 2 --auth-url 'http://127.0.0.1:<port>/oauth2/callback?code=...&state=...'
 ```
 
-Последняя команда спросит пароль для зашированного файла с данными авторизации, запишите его в .env
+Последняя команда спросит пароль для зашированного файла с данными авторизации, запишите его в .env. Так же в .env нужно записать email который использовался  
 
 ### 5. Настройка порогов
 В файле AGENTS.md найдите секцию CONFIG и измените в ней параметры
