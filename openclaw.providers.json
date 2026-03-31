@@ -1,0 +1,10 @@
+{
+  "providers": {
+    "proxy": {
+      "baseUrl": "http://host.docker.internal:12434",
+      "apiKey": "YOU_MAY_NOT_CHANGE_THIS_PLACEHOLDER",
+      "api": "openai-completions",
+      "models": []
+    }
+  }
+}
