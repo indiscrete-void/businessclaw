@@ -4,7 +4,7 @@
 
 ## Архитектура
 
-<img width="1987" height="612" alt="image" src="https://github.com/user-attachments/assets/3fe33675-9e26-4e8e-9c1c-a47a490d6cdb" />
+<img width="2036" height="653" alt="image" src="https://github.com/user-attachments/assets/459ebbcd-f6cb-49f2-acaa-a54667f0d81b" />
 
 ИИ агент использует google sheets как простую базу данных. Проверки критических показателей реализованы через периодические задачи планируемые встроенными в OpenClaw средствами для `cron` задач. 
 Нативный телеграм бот поддерживает кастомные команды через записи в openclaw.json и инструкции для агента по исполнению. Конфигурация осуществляется в человеко-читаемом формате. Рассчёты 
